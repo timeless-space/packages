@@ -67,11 +67,14 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
       @NonNull Long progress,
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
-
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webChromeClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
-    super.onProgressChanged(
-        getIdentifierForClient(webChromeClient), webViewIdentifier, progress, callback);
+        Objects.requireNonNull(id);
+    super.onProgressChanged(clienId, webViewIdentifier, progress, callback);
   }
 
   /** Passes arguments from {@link WebChromeClient#onShowFileChooser} to Dart. */
@@ -176,8 +179,12 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
       @NonNull WebChromeClient instance,
       @NonNull ConsoleMessage message,
       @NonNull Reply<Void> callback) {
+    final Long id = instanceManager.getIdentifierForStrongReference(instance);
+    if (id == null) {
+      return;
+    }
     super.onConsoleMessage(
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+        id,
         new GeneratedAndroidWebView.ConsoleMessage.Builder()
             .setLineNumber((long) message.lineNumber())
             .setMessage(message.message())
@@ -237,11 +244,8 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
         callback);
   }
 
-  private long getIdentifierForClient(WebChromeClient webChromeClient) {
+  private Long getIdentifierForClient(WebChromeClient webChromeClient) {
     final Long identifier = instanceManager.getIdentifierForStrongReference(webChromeClient);
-    if (identifier == null) {
-      throw new IllegalStateException("Could not find identifier for WebChromeClient.");
-    }
     return identifier;
   }
 }

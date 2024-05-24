@@ -103,9 +103,15 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
-    onPageStarted(getIdentifierForClient(webViewClient), webViewIdentifier, urlArg, callback);
+        Objects.requireNonNull(id);
+
+    onPageStarted(clienId, webViewIdentifier, urlArg, callback);
   }
 
   /** Passes arguments from {@link WebViewClient#onPageFinished} to Dart. */
@@ -116,9 +122,15 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
-    onPageFinished(getIdentifierForClient(webViewClient), webViewIdentifier, urlArg, callback);
+        Objects.requireNonNull(id);
+
+    onPageFinished(clienId, webViewIdentifier, urlArg, callback);
   }
 
   /** Passes arguments from {@link WebViewClient#onReceivedHttpError} to Dart. */
@@ -131,10 +143,15 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
-    final Long webViewIdentifier = instanceManager.getIdentifierForStrongReference(webView);
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
+
     onReceivedHttpError(
-        getIdentifierForClient(webViewClient),
-        webViewIdentifier,
+        clienId,
+        id,
         createWebResourceRequestData(request),
         createWebResourceResponseData(response),
         callback);
@@ -153,10 +170,16 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
+        Objects.requireNonNull(id);
+
     onReceivedRequestError(
-        getIdentifierForClient(webViewClient),
+        clienId,
         webViewIdentifier,
         createWebResourceRequestData(request),
         createWebResourceErrorData(error),
@@ -176,10 +199,16 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
+        Objects.requireNonNull(id);
+
     onReceivedRequestError(
-        getIdentifierForClient(webViewClient),
+        clienId,
         webViewIdentifier,
         createWebResourceRequestData(request),
         createWebResourceErrorData(error),
@@ -199,10 +228,16 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
+        Objects.requireNonNull(id);
+
     onReceivedError(
-        getIdentifierForClient(webViewClient),
+        clienId,
         webViewIdentifier,
         errorCodeArg,
         descriptionArg,
@@ -222,10 +257,16 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
+        Objects.requireNonNull(id);
+
     requestLoading(
-        getIdentifierForClient(webViewClient),
+        clienId,
         webViewIdentifier,
         createWebResourceRequestData(request),
         callback);
@@ -241,9 +282,15 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
-    urlLoading(getIdentifierForClient(webViewClient), webViewIdentifier, urlArg, callback);
+        Objects.requireNonNull(id);
+
+    urlLoading(clienId, webViewIdentifier, urlArg, callback);
   }
 
   /** Passes arguments from {@link WebViewClient#doUpdateVisitedHistory} to Dart. */
@@ -255,10 +302,15 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       @NonNull Reply<Void> callback) {
     webViewFlutterApi.create(webView, reply -> {});
 
+    final Long id = instanceManager.getIdentifierForStrongReference(webView);
+    final Long clienId = getIdentifierForClient(webViewClient);
+    if (id == null || clienId == null) {
+      return;
+    }
     final Long webViewIdentifier =
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(webView));
-    doUpdateVisitedHistory(
-        getIdentifierForClient(webViewClient), webViewIdentifier, url, isReload, callback);
+        Objects.requireNonNull(id);
+
+    doUpdateVisitedHistory(clienId, webViewIdentifier, url, isReload, callback);
   }
 
   /** Passes arguments from {@link WebViewClient#onReceivedHttpAuthRequest} to Dart. */
@@ -281,11 +333,8 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
         callback);
   }
 
-  private long getIdentifierForClient(WebViewClient webViewClient) {
+  private Long getIdentifierForClient(WebViewClient webViewClient) {
     final Long identifier = instanceManager.getIdentifierForStrongReference(webViewClient);
-    if (identifier == null) {
-      throw new IllegalStateException("Could not find identifier for WebViewClient.");
-    }
     return identifier;
   }
 }
